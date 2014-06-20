@@ -17,8 +17,10 @@
     "reporter"
   ],
   "dependencies": {
-    "mocha": ">=1.3.0",
     "diff": "1.0.7"
+  },
+  "peerDependencies": {
+    "mocha": ">=1.3.0"
   },
   "author": "Juho Vähä-Herttua",
   "license": "MIT",
