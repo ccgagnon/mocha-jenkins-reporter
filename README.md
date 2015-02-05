@@ -22,6 +22,22 @@ jenkins:
 .PHONY: jenkins
 ```
 
+
+How to use it programmatically
+------------------------------
+
+```
+	var mochaOptions = {
+		reporter: 'mocha-jenkins-reporter',
+		reporterOptions:{
+							junitReportPath: "[YOUR PATH]", 
+							junitReportName: "Test suite"
+						}
+	}
+
+    mocha = new Mocha (mochaOptions);
+```
+
 The @ in the beginning is just `make` syntax for not printing out the line. Because mocha by default reports the number of failed tests as the return code (and it is a good thing) we need to add `|| true` to the end of the command in order to make Jenkins not interpret this run as a crash.
 
 The environment variable `JUNIT_REPORT_PATH` is used for passing the output filename or directory for the reporter. If an explicit filename is used, any existing reports in the same path will be overwritten, so be careful with it. If an existing directory is used instead, then the output will be in the format "path/to/directory/timestamp.xml" where timestamp is milliseconds since January 1, 1970. If the environment variable is not set, no JUnit style XML report is written and the test results are only printed to the console.
