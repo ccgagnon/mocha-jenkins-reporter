@@ -11,7 +11,7 @@ General Information
 
 First you need to add the library to your package.json, you can use the following setting to get the latest version:
 
-`"mocha-jenkins-reporter": "0.1.4"`
+`"mocha-jenkins-reporter": "0.1.9"`
 
 For the actual test run you can use the following Makefile:
 
@@ -55,6 +55,20 @@ Example console output of the reporter:
   Suite duration: 0.048 s, Tests: 1
 ```
 
+Programmatic Configuration
+--------------------------
+All of the above config values can be set with options passed in to mocha.
+```
+mocha({
+            "reporter": "mocha-jenkins-reporter",
+            "reporterOptions": {
+                "junit_report_name": "Tests",
+                "junit_report_path": "report.xml",
+                "junit_report_stack": 1
+            }
+        }
+```
+
 Jenkins Setup
 -------------
 
@@ -72,11 +86,19 @@ After this you should be able to add `Publish JUnit test result report` in your 
 
 After all this setting up, just click `Save` and start building, you should get all errors nicely both to the console log as the tests are being run and finally to the Jenkins reports.
 
+SonarQube Integration
+---------------------
+
+[SonarQube](http://www.sonarqube.org/) is a popular tool for continuous inspection of code quality. You can find documentation for JavaScript language on [JavaScript Plugin](http://docs.sonarqube.org/display/SONAR/JavaScript+Plugin) page.
+
+One aspect of SonarQube analysis is outcome of unit tests. To properly display test results environment variable `JENKINS_REPORTER_ENABLE_SONAR` must be set to `true`. By default reporter looks for tests in `./test` directory. It can be changed using environment variable `JENKINS_REPORTER_TEST_DIR` and providing relative path to the directory with tests.
+
 License
 -------
 
 ```
-Copyright (c) 2013-2014 Futurice Ltd
+Copyright (c) 2015 Juho Vähä-Herttua and contributors
+Copyright (c) 2013-2014 Futurice Ltd and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
